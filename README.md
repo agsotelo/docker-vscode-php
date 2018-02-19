@@ -24,7 +24,7 @@ You can set up `bash` alias for the command above, for example:
 ```bash
 nano ~/.bashrc
 
-alias phpcode-lumen='docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html -e DISPLAY=unix$DISPLAY -e GITUSERNAME='agsotelo' -e GITUSEREMAIL='agsotelo@gmail.com' -e DISPLAY=unix$DISPLAY --device /dev/dri --name vscode --net="host" vscode-lumen'
+alias phpcode-lumen='docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html -e DISPLAY=unix$DISPLAY -e GITUSERNAME='agsotelo' -e GITUSEREMAIL='agsotelo@gmail.com' -e DISPLAY=unix$DISPLAY --device /dev/dri --name vscode --net="host" agsotelo/vscode-lumen'
 
 source ~/.bashrc
 ```
