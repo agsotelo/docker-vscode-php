@@ -1,9 +1,9 @@
-## Visual Studio Code for PHP
-This docker image packages [Visual Studio Code](https://code.visualstudio.com/) (`vscode`) with a curated list of extensions for PHP development. The goal of this image is to offer an easier, faster and free IDE, comparing to [PhpStorm](https://www.jetbrains.com/phpstorm/).
+## Visual Studio Code for Lumen
+Thanks to the work of [Jingsheng Wang](https://github.com/INsReady/docker-vscode-php) and a few modifications I created a portable "Visual Studio Code" for Lumen software development. This image meets [requirements to work with Lumen 5.6](https://lumen.laravel.com/docs/5.6#server-requirements) and have vscode extensions for:
 
-With this image, you don't need to install an "IDE" anymore, you simply run a Docker command, which will launch the `vscode`, creates the PHP enviroment, and then remove itself when you are done working.
-
-![Demo GIF](https://github.com/felixfbecker/vscode-php-debug/raw/master/images/demo.gif)
+- Adds syntax highlighting, commands, hover tips, and linting for Dockerfile and docker-compose files.
+- Support for dotenv file syntax.
+- Debug support for PHP with XDebug - Advanced Autocompletion and Refactoring support for PHP
 
 ## How to use
 
@@ -11,26 +11,31 @@ With this image, you don't need to install an "IDE" anymore, you simply run a Do
 
 To launch the "IDE" and set the current folder as the root of your application:
 
-```console
-$ docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html -e DISPLAY=unix$DISPLAY --device /dev/dri --name vscode --net="host" insready/vscode-php
+```bash
+$ docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html \ 
+        -e DISPLAY=unix$DISPLAY -e GITUSERNAME='agsotelo' -e GITUSEREMAIL='agsotelo@gmail.com' \ 
+        --device /dev/dri --name vscode --net="host" agsotelo/vscode-lumen
 ```
+
+**Note**: Change GITUSERNAME and GITUSERMAIL as you need (Git global credentials are set at start).
 
 You can set up `bash` alias for the command above, for example:
 
-```
+```bash
 nano ~/.bashrc
 
-alias phpcode='docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html -e DISPLAY=unix$DISPLAY --device /dev/dri --name vscode --net="host" insready/vscodphp'
+alias phpcode-lumen='docker run -ti --rm -v /tmp/.X11-unix:/tmp/.X11-unix -v "$PWD":/var/www/html -e DISPLAY=unix$DISPLAY -e GITUSERNAME='agsotelo' -e GITUSEREMAIL='agsotelo@gmail.com' -e DISPLAY=unix$DISPLAY --device /dev/dri --name vscode --net="host" vscode-lumen'
 
 source ~/.bashrc
 ```
 
-Once you set up the alias above, you can simply launch your "IDE" with simple command `phpcode`.
+Once you set up the alias above, you can simply launch your "IDE" with simple command `phpcode-lumen`.
 
 ### Stop:
 
 To stop the container and auto-remove it:
-Just use `Ctrl+C`
+
+Just use `Ctrl+C` from console, but i have no issues using File > Exit from vscode.
 
 ### Use with other Docker image:
 
@@ -52,7 +57,8 @@ More documentation on this bit configuration can be fund [here](https://github.c
 
 * [PHP IntelliSense](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-intellisense)
 * [PHP Debug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
-* [Twig](https://marketplace.visualstudio.com/items?itemName=whatwedo.twig)
+* [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
+* [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker)
 
 ## Known issues
 
